@@ -4,10 +4,7 @@
       "DownstreamPathTemplate": "/weatherforecast",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "63305"
-        },
+ 
         {
           "Host": "localhost",
           "Port": "5000"
