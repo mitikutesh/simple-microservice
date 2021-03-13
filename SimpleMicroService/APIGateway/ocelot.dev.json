@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/weatherforecast",
+      "DownstreamPathTemplate": "/image",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
  
@@ -10,8 +10,8 @@
           "Port": "5000"
         }
       ],
-      "UpstreamPathTemplate": "/api/weather",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamPathTemplate": "/api/image",
+      "UpstreamHttpMethod": [ "GET" , "POST", "PUT", "DELETE"]
     }
   ],
   "GlobalConfiguration": {
