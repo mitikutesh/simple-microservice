@@ -20,11 +20,18 @@ namespace APIGateway
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                   // var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureAppConfiguration(config =>
-                        config.AddJsonFile($"ocelot.{env}.json"));
+                    //webBuilder.ConfigureAppConfiguration(config =>
+                    //    config.AddJsonFile($"ocelot.{env}.json"));
                 })
+            .ConfigureAppConfiguration((hostContext, config) =>
+            {
+                var env = Environment.GetEnvironmentVariable("GATEWAY_ENVIRONMENT");
+                config
+                    .SetBasePath(hostContext.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile($"ocelot.{env}.json", optional: false, reloadOnChange: true);
+            })
             .ConfigureLogging(logging => logging.AddConsole());  
     }
 }

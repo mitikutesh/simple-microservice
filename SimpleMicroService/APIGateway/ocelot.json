@@ -7,10 +7,6 @@
         {
           "Host": "localhost",
           "Port": "63305"
-        },
-        {
-          "Host": "localhost",
-          "Port": "5000"
         }
       ],
       "UpstreamPathTemplate": "/api/weather",
