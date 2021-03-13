@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ImageService.CommandsAndQueries.Queries
 {
-    public record ListAllImagss : IQuery<List<ImageFile>>
+    public record ListAllImages : IQuery<List<ImageFile>>
     {
     }
-    public record GetImagsById : IQuery<List<ImageFile>>
+    public record GetImagsById : IQuery<ImageFile>
     {
     }
+
+    public record GetImagesByTag : IQuery<List<ImageFile>> { }
 }
