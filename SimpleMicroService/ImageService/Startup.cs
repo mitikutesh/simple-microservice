@@ -1,4 +1,5 @@
 using ImageService.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ImageService
@@ -36,6 +38,7 @@ namespace ImageService
                         .MigrationsHistoryTable("SimpleMicroServiceDbMigHistory")
                         .EnableRetryOnFailure(2);
                     }));
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
