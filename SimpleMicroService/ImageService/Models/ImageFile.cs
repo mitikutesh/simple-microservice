@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace ImageService.Models
 {
-    public class Tags
+    public class ImageFile
     {
+        public Guid Id { get; set; }
+        public Byte[] Image { get; set; }
     }
 }
