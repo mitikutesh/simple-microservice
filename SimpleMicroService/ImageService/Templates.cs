@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ImageService.Features.Commands
+namespace ImageService
 {
-    public class CreateImageCommand
+    public class Templates
     {
     }
 }

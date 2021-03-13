@@ -1,14 +1,13 @@
-﻿using ImageService.Models;
+﻿using ImageService.BusinessLogic.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace ImageService.Data
+namespace ImageService.BusinessLogic.Data
 {
     interface IApplicationDbContext
     {
         DbSet<ImageFile> ImageFiles { get; set; }
         DbSet<ImageTag> ImageTags { get; set; }
-        DbSet<FileTag> FileTags { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

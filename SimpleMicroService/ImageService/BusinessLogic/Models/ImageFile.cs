@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace ImageService.Models
+namespace ImageService.BusinessLogic.Models
 {
     public class ImageFile
     {
         public Guid Id { get; set; }
+        public string Name { get; set; }
         public Byte[] Image { get; set; }
+        public List<ImageTag> Tags { get; set; }
     }
 }
