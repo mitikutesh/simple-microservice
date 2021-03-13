@@ -1,22 +1,36 @@
-﻿using ImageService.BusinessLogic.Models;
+﻿using ImageService.BusinessLogic.Data;
+using ImageService.BusinessLogic.Models;
 using ImageService.CommandsAndQueries.Queries;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ImageService.BusinessLogic
 {
-    public class QueryHandlers : IRequestHandler<ListAllImages, List<ImageFile>>,
+    public class QueryHandlers : IRequestHandler<ListAllImages, IEnumerable<ImageFile>>,
                                 IRequestHandler<GetImagsById, ImageFile>,
-                                 IRequestHandler<ListAllTags, List<ImageTag>>,
-                                IRequestHandler<ListAllTagsForImage, List<ImageTag>>,
+                                 IRequestHandler<ListAllTags, IEnumerable<ImageTag>>,
+                                IRequestHandler<ListAllTagsForImage, IEnumerable<ImageTag>>,
                                 IRequestHandler<GetTag, ImageTag>,
-                                IRequestHandler<GetImagesByTag, List<ImageFile>>
+                                IRequestHandler<GetImagesByTag, IEnumerable<ImageFile>>
     {
-        public Task<List<ImageFile>> Handle(ListAllImages request, CancellationToken cancellationToken)
+        private readonly IApplicationContext _context;
+
+        public QueryHandlers(IApplicationContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+        }
+        public async Task<IEnumerable<ImageFile>> Handle(ListAllImages request, CancellationToken cancellationToken)
+        {
+            var testImg = new ImageFile { Id = Guid.NewGuid(), Image = null, Name = "test", Tags = null };
+            var imgList = await _context.ImageFiles.ToListAsync();
+            imgList.Add(testImg);
+            if (imgList == null)
+                return null;
+            return imgList.AsReadOnly();
         }
 
         public Task<ImageFile> Handle(GetImagsById request, CancellationToken cancellationToken)
@@ -24,12 +38,12 @@ namespace ImageService.BusinessLogic
             throw new System.NotImplementedException();
         }
 
-        public Task<List<ImageTag>> Handle(ListAllTags request, CancellationToken cancellationToken)
+        public Task<IEnumerable<ImageTag>> Handle(ListAllTags request, CancellationToken cancellationToken)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<ImageTag>> Handle(ListAllTagsForImage request, CancellationToken cancellationToken)
+        public Task<IEnumerable<ImageTag>> Handle(ListAllTagsForImage request, CancellationToken cancellationToken)
         {
             throw new System.NotImplementedException();
         }
@@ -39,7 +53,7 @@ namespace ImageService.BusinessLogic
             throw new System.NotImplementedException();
         }
 
-        public Task<List<ImageFile>> Handle(GetImagesByTag request, CancellationToken cancellationToken)
+        public Task<IEnumerable<ImageFile>> Handle(GetImagesByTag request, CancellationToken cancellationToken)
         {
             throw new System.NotImplementedException();
         }

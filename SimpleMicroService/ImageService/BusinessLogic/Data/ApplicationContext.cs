@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.BusinessLogic.Data
 {
-    public class ApplicationContext : DbContext, IApplicationDbContext
+    public class ApplicationContext : DbContext, IApplicationContext
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 

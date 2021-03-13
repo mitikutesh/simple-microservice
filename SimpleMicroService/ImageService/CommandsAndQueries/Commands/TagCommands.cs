@@ -12,9 +12,12 @@ namespace ImageService.CommandsAndQueries.Commands
     }
     public record DeleteTag : ICommand<string>
     {
-
+        [Required]
+        public int Id { get; set; }
     }
     public record UpdateTag : ICommand<string>
     {
+        [Required]
+        public int Id { get; set; }
     }
 }

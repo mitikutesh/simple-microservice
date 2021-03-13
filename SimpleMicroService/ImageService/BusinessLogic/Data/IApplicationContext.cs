@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ImageService.BusinessLogic.Data
 {
-    interface IApplicationDbContext
+    public interface IApplicationContext
     {
         DbSet<ImageFile> ImageFiles { get; set; }
         DbSet<ImageTag> ImageTags { get; set; }

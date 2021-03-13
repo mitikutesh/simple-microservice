@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace ImageService.CommandsAndQueries.Queries
 {
-    public record ListAllTags : IQuery<List<ImageTag>>
+    public record ListAllTags : IQuery<IEnumerable<ImageTag>>
     {
     }
-    public record ListAllTagsForImage : IQuery<List<ImageTag>>
+    public record ListAllTagsForImage : IQuery<IEnumerable<ImageTag>>
     {
         public Guid ImageId { get; set; }
     }
     public record GetTag : IQuery<ImageTag>
     {
-        public int TagId { get; set; }
+        public Guid TagId { get; set; }
     }
 }
