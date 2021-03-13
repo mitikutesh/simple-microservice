@@ -1,4 +1,5 @@
 ﻿using ImageService.BusinessLogic.Data;
+using ImageService.BusinessLogic.Models;
 using ImageService.CommandsAndQueries.Commands;
 using MediatR;
 using System.Threading;
@@ -19,9 +20,19 @@ namespace ImageService.BusinessLogic
         {
             _context = context;
         }
-        public Task<string> Handle(AddImage request, CancellationToken cancellationToken)
+        public async Task<string> Handle(AddImage request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var img = new ImageFile
+            {
+                Id = request.Id,
+                Image = request.Image,
+                Name = request.ImageName
+            };
+            _context.ImageFiles.Add(img);
+            if (await _context.SaveChangesAsync() > 0)
+                return "Image Created!";
+            else
+                return "failed to create!";
         }
 
         public Task<string> Handle(DeleteImage request, CancellationToken cancellationToken)

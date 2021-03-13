@@ -25,9 +25,7 @@ namespace ImageService.BusinessLogic
         }
         public async Task<IEnumerable<ImageFile>> Handle(ListAllImages request, CancellationToken cancellationToken)
         {
-            var testImg = new ImageFile { Id = Guid.NewGuid(), Image = null, Name = "test", Tags = null };
             var imgList = await _context.ImageFiles.ToListAsync();
-            imgList.Add(testImg);
             if (imgList == null)
                 return null;
             return imgList.AsReadOnly();

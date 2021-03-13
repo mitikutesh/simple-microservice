@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ImageService.Controllers
@@ -35,12 +36,12 @@ namespace ImageService.Controllers
             return Ok(await _mediator.Send(new GetImagsById { Id = id }));
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             return Ok(await _mediator.Send(new DeleteImage { Id = id }));
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, UpdateImage command)
+        public async Task<IActionResult> Update(Guid id, UpdateImage command)
         {
             if (id != command.Id)
             {
