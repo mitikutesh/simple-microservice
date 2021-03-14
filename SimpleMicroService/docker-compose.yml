@@ -1,0 +1,67 @@
+version: '3.4'
+
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: db
+    environment:
+        SA_PASSWORD: "root"
+        ACCEPT_EULA: "Y"
+    ports:
+    - 1401:1433 
+    networks:
+    - network-microservice
+
+  #test
+  imageservice:
+    image: ${DOCKER_REGISTRY-}imageservice
+    container_name: imageservice
+    build:
+      context: .
+      dockerfile: ImageService/Dockerfile
+    networks:
+            - network-microservice
+    depends_on:
+        - db
+    links:
+        - db 
+
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    container_name: apigateway
+    build:
+      context: .
+      dockerfile: APIGateway/Dockerfile
+    links:
+        - imageservice
+    depends_on:
+        - imageservice
+    ports:
+        - 8080:80
+
+    networks:
+    - network-microservice
+    - network-gateway
+
+
+networks:
+  # Network for api gateway
+  network-gateway:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.2.0/24
+  # Network for microservices
+  network-microservice:
+    #internal: true
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.4.0/24
+
+
+

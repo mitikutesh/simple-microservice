@@ -4,14 +4,15 @@
       "DownstreamPathTemplate": "/image",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
- 
+
         {
-          "Host": "localhost",
-          "Port": "5000"
+          "Host": "imageservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/api/image",
-      "UpstreamHttpMethod": [ "GET" , "POST", "PUT", "DELETE"]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+  
     }
   ],
   "GlobalConfiguration": {

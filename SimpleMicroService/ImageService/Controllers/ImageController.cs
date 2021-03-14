@@ -23,7 +23,10 @@ namespace ImageService.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddImage command)
         {
-            return Ok(await _mediator.Send(command));
+            var result = await _mediator.Send(command);
+            if (string.IsNullOrWhiteSpace(result))
+                return NotFound("Not found");
+            return Ok(result);
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()

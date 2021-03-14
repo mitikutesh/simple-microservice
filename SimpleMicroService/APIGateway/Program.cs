@@ -27,10 +27,10 @@ namespace APIGateway
                 })
             .ConfigureAppConfiguration((hostContext, config) =>
             {
-                var env = Environment.GetEnvironmentVariable("GATEWAY_ENVIRONMENT");
+                //var env = Environment.GetEnvironmentVariable("GATEWAY_ENVIRONMENT");
                 config
                     .SetBasePath(hostContext.HostingEnvironment.ContentRootPath)
-                    .AddJsonFile($"ocelot.{env}.json", optional: false, reloadOnChange: true);
+                    .AddJsonFile($"ocelot.json", optional: false, reloadOnChange: true);
             })
             .ConfigureLogging(logging => logging.AddConsole());  
     }

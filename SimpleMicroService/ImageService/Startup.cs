@@ -18,14 +18,16 @@ namespace ImageService
         }
 
         public IConfiguration Configuration { get; }
+        private static string _connStr = @"Server=127.0.0.1,1401;Database=Master; User Id=SA; Password=root";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Configuration.GetConnectionString("DefaultConnection")
             services.AddScoped<IApplicationContext, ApplicationContext>();
             services.AddControllers();
             services.AddDbContext<ApplicationContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                opt.UseSqlServer(_connStr,
                 b => {
                     b
                         .MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)
